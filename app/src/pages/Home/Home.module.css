@@ -1,0 +1,100 @@
+.homeEvents {
+  padding-left: 110px;
+  padding-right: 110px;
+}
+
+.homeEventsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 40px;
+}
+
+.homeEventsCta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* CTA Banner */
+.homeCta {
+  padding-left: 110px;
+  padding-right: 110px;
+  margin-bottom: 20px;
+}
+
+.homeCtaInner {
+  text-align: center;
+  padding: 72px 60px;
+  border-radius: var(--radius-xl);
+  background: var(--grad-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.homeCtaInner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255,255,255,.12), transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255,255,255,.08), transparent 40%);
+}
+
+.homeCtaTitle {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  color: #fff;
+  max-width: 640px;
+  margin: 0 auto 16px;
+  line-height: 1.1;
+}
+
+.homeCtaTitle span {
+  background: linear-gradient(90deg, #ffeb99, #ffd166);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.homeCtaSub {
+  position: relative;
+  color: rgba(255,255,255,.8);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 32px;
+}
+
+.homeCtaActions {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.homeCtaActions .btn--primary {
+  background: #fff;
+  color: var(--primary);
+  box-shadow: 0 14px 28px rgba(0,0,0,.15);
+}
+
+.homeCtaActions .btn--secondary {
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.3);
+}
+
+@media (max-width: 1024px) {
+  .homeEvents, .homeCta { padding-left: 48px; padding-right: 48px; }
+  .homeEventsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .homeEvents, .homeCta { padding-left: 20px; padding-right: 20px; }
+  .homeEventsGrid { grid-template-columns: 1fr; }
+  .homeCtaInner { padding: 48px 24px; }
+}

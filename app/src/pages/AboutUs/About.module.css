@@ -1,0 +1,71 @@
+.aboutHero {
+  text-align: center;
+  padding-left: 110px;
+  padding-right: 110px;
+}
+
+.aboutHeroInner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.aboutHeroSub {
+  margin-top: 20px;
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+/* Values */
+.aboutValues {
+  padding-left: 110px;
+  padding-right: 110px;
+}
+
+.aboutValuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.aboutValuesCard {
+  padding: 30px 24px;
+}
+
+.aboutValuesIcon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.aboutValuesTitle {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.aboutValuesBody {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+  .aboutHero, .aboutValues {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .aboutValuesGrid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutHero, .aboutValues {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .aboutValuesGrid {
+    grid-template-columns: 1fr;
+  }
+}

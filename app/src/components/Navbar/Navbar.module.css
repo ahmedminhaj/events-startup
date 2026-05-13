@@ -1,0 +1,215 @@
+.navbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 46px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Brand */
+.navbarBrand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+/* Logo image — the PNG has a black bg so we use mix-blend-mode to knock it out */
+.navbarLogo {
+  height: 120px;
+  width: auto;
+  display: block;
+  /* The logo PNG has a black background; multiply blends it away on white */
+  mix-blend-mode: multiply;
+  object-fit: contain;
+}
+
+/* Links */
+.navbarLinks {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+  list-style: none;
+}
+
+.navbarLink {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: #484b55;
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  letter-spacing: .01em;
+}
+
+.navbarLink:hover {
+  color: var(--primary);
+}
+
+.navbarLink--active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Mobile Menu Toggle */
+.navbarToggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.navbarToggleBar {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform var(--duration) var(--ease),
+              opacity var(--duration) var(--ease);
+}
+
+/* Mobile Drawer */
+.navbarDrawer {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 24px 24px;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.navbarDrawerLogo {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 4px;
+}
+
+.navbarDrawerLink {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
+}
+
+.navbarDrawerLink:hover { color: var(--primary); }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 24px;
+  }
+
+  .navbarLinks {
+    display: none;
+  }
+
+  .navbarToggle {
+    display: flex;
+  }
+
+  .navbarDrawer {
+    display: flex;
+  }
+
+  .navbarDrawerLink {
+    display: block;
+  }
+}
+
+/* ── Auth actions ── */
+.navbarActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: #484b55;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.authLink:hover {
+  color: var(--primary);
+}
+
+.authBtn {
+  font-size: 14px !important;
+  padding: 8px 18px !important;
+}
+
+/* ── Avatar / user ── */
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: #999;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.logoutBtn:hover { color: var(--primary); }
+
+/* ── Drawer auth row ── */
+.drawerAuthRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 4px;
+  margin-top: 4px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.drawerUsername {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+}
+

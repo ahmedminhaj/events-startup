@@ -1,0 +1,213 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1.04fr 0.96fr;
+  gap: 64px;
+  align-items: center;
+  padding: 88px 110px 86px;
+}
+
+/* Left Column */
+.heroEyebrow {
+  margin-bottom: 22px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.2vw, 66px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  font-weight: 900;
+  max-width: 660px;
+}
+
+.heroCopy {
+  margin-top: 28px;
+  max-width: 520px;
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+/* Right Column — Phone Card */
+.heroPhoneWrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.phoneCard {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: var(--radius-xl);
+  background: rgba(255,255,255,.72);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.phoneScreen {
+  min-height: 510px;
+  border-radius: var(--radius-xl);
+  padding: 26px;
+  background:
+    var(--grad-card),
+    url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=900&q=80');
+  background-size: cover;
+  background-blend-mode: multiply;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneScreenHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.phoneScreenDots {
+  display: flex;
+  gap: 6px;
+}
+
+.phoneScreenDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.5);
+}
+
+.phoneScreenDot--active {
+  background: #fff;
+}
+
+.phoneScreenSearch {
+  margin-top: 28px;
+  padding: 14px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,.2);
+  color: rgba(255,255,255,.9);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phoneScreenSearchIcon {
+  opacity: .7;
+  font-size: 16px;
+}
+
+/* Floating event chips */
+.phoneScreenChips {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.phoneScreenChip  {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,.22);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-display);
+  letter-spacing: .02em;
+}
+
+.phoneScreenChip--active {
+  background: rgba(255,255,255,.9);
+  color: var(--primary);
+}
+
+/* Feature card inside phone */
+.phoneFeatureCard {
+  margin-top: auto;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.92);
+  color: var(--text-primary);
+}
+
+.phoneFeatureCard h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.phoneFeatureCard p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Floating badge on card */
+.phoneCardBadge {
+  position: absolute;
+  right: -18px;
+  top: 40px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  white-space: nowrap;
+}
+
+.phoneCardBadgeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    padding: 60px 48px;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 52px 20px;
+    gap: 40px;
+  }
+
+  .heroPhoneWrap {
+    justify-content: center;
+  }
+
+  .phoneCard {
+    max-width: 100%;
+  }
+
+  .phoneCardBadge {
+    display: none;
+  }
+}
