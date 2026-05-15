@@ -1,0 +1,86 @@
+import db from "./database_client.js";
+
+const initDatabase = async () => {
+  const exists = await db.schema.hasTable(
+    "events"
+  );
+
+  if (!exists) {
+    await db.schema.createTable(
+      "events",
+      (table) => {
+        table.increments("id").primary();
+
+        table.string("title").notNullable();
+
+        table.text("description");
+
+        table.string("category");
+
+        table.string("country");
+
+        table.string("city");
+
+        table.string("venue");
+
+        table.string("date");
+
+        table.string("image");
+
+        table.integer("price").defaultTo(0);
+      }
+    );
+
+    console.log("Events table created");
+
+    await db("events").insert([
+      {
+        title: "Copenhagen Jazz Festival",
+
+        description:
+          "International jazz performances.",
+
+        category: "Music",
+
+        country: "Denmark",
+
+        city: "Copenhagen",
+
+        venue: "DR Koncerthuset",
+
+        date: "2026-06-14",
+
+        image:
+          "https://images.unsplash.com/photo-1501386761578-eac5c94b800a",
+
+        price: 399,
+      },
+
+      {
+        title: "Aarhus Tech Meetup",
+
+        description:
+          "Developer networking event.",
+
+        category: "Technology",
+
+        country: "Denmark",
+
+        city: "Aarhus",
+
+        venue: "DOKK1",
+
+        date: "2026-07-03",
+
+        image:
+          "https://images.unsplash.com/photo-1540575467063-178a50c2df87",
+
+        price: 149,
+      },
+    ]);
+
+    console.log("Seed data inserted");
+  }
+};
+
+export default initDatabase;
