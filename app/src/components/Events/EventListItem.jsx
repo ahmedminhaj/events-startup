@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './EventListItem.module.css';
 
 const EventListItem = ({ event }) => {
-  const { id, title, date, location, category, price, image, spotsLeft, description, tags } = event;
+  const { id, title, date, city, category, price, image, spotsLeft, description, tags } = event;
   const isUrgent = spotsLeft <= 20;
 
   return (
@@ -23,7 +23,7 @@ const EventListItem = ({ event }) => {
             <span className={styles.metaIcon}>📅</span> {date}
           </span>
           <span className={styles.metaItem}>
-            <span className={styles.metaIcon}>📍</span> {location}
+            <span className={styles.metaIcon}>📍</span> {city}
           </span>
         </div>
 

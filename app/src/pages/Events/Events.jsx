@@ -1,13 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getEvents } from "../../api/eventsApi";
 import EventListItem from '../../components/Events/EventListItem';
 import EventSearch from '../../components/Events/EventSearch';
-import { EVENTS } from '../../assets/data/events';
+// import { EVENTS } from '../../assets/data/events';
 import styles from './Events.module.css';
 
 const Events = () => {
   const [query, setQuery] = useState('');
+  const [events, setEvents] = useState([]);
 
-  const filtered = EVENTS.filter((event) =>
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState("");
+
+  
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        
+        setError("");
+
+        const data = await getEvents();
+
+        setEvents(data);
+      } catch (err) {
+        setError(
+          err.message ||
+            "Unable to load events"
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchEvents();
+  }, []);
+  
+  if (loading) {
+    return (
+      <div className={styles.status}>
+        Loading events...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.error}>
+        {error}
+      </div>
+    );
+  }
+  
+  const filtered = events.filter((event) =>
     event.title.toLowerCase().includes(query.toLowerCase())
   );
 

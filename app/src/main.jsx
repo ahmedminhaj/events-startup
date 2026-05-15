@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Events from './pages/Events/Events';
 import About from './pages/AboutUs/About';
 import Contact from './pages/Contact/Contact';
+import EventDetails from './components/Events/EventDetails';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true,          element: <Home />    },
       { path: '/events',      element: <Events />  },
+      { path: '/events/:id',  element: <EventDetails />  },
       { path: '/about',       element: <About />   },
       { path: '/contact',     element: <Contact /> },
     ],
