@@ -85,31 +85,70 @@ const initDatabase = async () => {
   const usersExists =
   await db.schema.hasTable("users");
 
-if (!usersExists) {
-  await db.schema.createTable(
-    "users",
-    (table) => {
-      table.increments("id").primary();
+  if (!usersExists) {
+    await db.schema.createTable(
+      "users",
+      (table) => {
+        table.increments("id").primary();
 
-      table
-        .string("name")
-        .notNullable();
+        table
+          .string("name")
+          .notNullable();
 
-      table
-        .string("email")
-        .notNullable()
-        .unique();
+        table
+          .string("email")
+          .notNullable()
+          .unique();
 
-      table
-        .string("password")
-        .notNullable();
+        table
+          .string("password")
+          .notNullable();
 
-      table.timestamps(true, true);
-    }
+        table.timestamps(true, true);
+      }
+    );
+
+    console.log("Users table created");
+  }
+
+  const cartTableExists =
+  await db.schema.hasTable(
+    "cart_items"
   );
 
-  console.log("Users table created");
-}
+  if (!cartTableExists) {
+    await db.schema.createTable(
+      "cart_items",
+      (table) => {
+        table
+          .increments("id")
+          .primary();
+
+        table
+          .integer("user_id")
+          .notNullable()
+          .references("id")
+          .inTable("users")
+          .onDelete("CASCADE");
+
+        table
+          .integer("event_id")
+          .notNullable()
+          .references("id")
+          .inTable("events")
+          .onDelete("CASCADE");
+
+        table.timestamps(
+          true,
+          true
+        );
+      }
+    );
+
+    console.log(
+      "Cart items table created"
+    );
+  }
 };
 
 export default initDatabase;

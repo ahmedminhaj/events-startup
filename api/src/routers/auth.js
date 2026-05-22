@@ -64,7 +64,7 @@ router.post(
       const hashedPassword =
         await bcrypt.hash(password, 10);
 
-      const [userId] = await db(
+      const user = await db(
         "users"
       ).insert({
         name,
@@ -74,8 +74,8 @@ router.post(
 
       const token = jwt.sign(
         {
-          id: userId,
-          email,
+          id: user.id,
+          email: user.email,
         },
         process.env.JWT_SECRET,
         {
@@ -87,9 +87,9 @@ router.post(
         accessToken: token,
 
         user: {
-          id: userId,
-          name,
-          email,
+          id: user.id,
+          name: user.name,
+          email: user.email,
         },
       });
     } catch (error) {
