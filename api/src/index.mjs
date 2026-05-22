@@ -5,8 +5,10 @@ import bodyParser from "body-parser";
 // import knex from "./database_client.js";
 // import nestedRouter from "./routers/nested.js";
 import initDatabase from "./initDatabase.js";
+// import authMiddleware from "./middleware/authMiddleware.js";
 
 import eventsRouter from "./routers/events.js";
+import authRouter from "./routers/auth.js";
 
 const app = express();
 app.use(cors());
@@ -16,6 +18,7 @@ await initDatabase();
 
 const apiRouter = express.Router();
 apiRouter.use("/events", eventsRouter);
+apiRouter.use("/auth", authRouter);
 
 // This is an example of how to set up a route. Replace it with your own.
 // apiRouter.get("/", async (req, res) => {

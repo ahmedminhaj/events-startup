@@ -1,11 +1,11 @@
 import db from "./database_client.js";
 
 const initDatabase = async () => {
-  const exists = await db.schema.hasTable(
+  const existsEvent = await db.schema.hasTable(
     "events"
   );
 
-  if (!exists) {
+  if (!existsEvent) {
     await db.schema.createTable(
       "events",
       (table) => {
@@ -81,6 +81,35 @@ const initDatabase = async () => {
 
     console.log("Seed data inserted");
   }
+
+  const usersExists =
+  await db.schema.hasTable("users");
+
+if (!usersExists) {
+  await db.schema.createTable(
+    "users",
+    (table) => {
+      table.increments("id").primary();
+
+      table
+        .string("name")
+        .notNullable();
+
+      table
+        .string("email")
+        .notNullable()
+        .unique();
+
+      table
+        .string("password")
+        .notNullable();
+
+      table.timestamps(true, true);
+    }
+  );
+
+  console.log("Users table created");
+}
 };
 
 export default initDatabase;

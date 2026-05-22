@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/icons/ticker-logo.svg';
 import AuthModal from '../../components/Auth/AuthModal';
 import styles from './Navbar.module.css';
+import  useAuth  from '../../hooks/useAuth';
 
 const NAV_LINKS = [
   { label: 'Home',    to: '/' },
@@ -13,11 +14,10 @@ const NAV_LINKS = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [authModal, setAuthModal] = useState(null); // 'login' | 'register' | null
-  const [user, setUser] = useState(null);
+  const [authModal, setAuthModal] = useState(null); 
+  const { user, logout } = useAuth();
 
-  const handleAuth = (displayName) => setUser(displayName);
-  const handleLogout = () => setUser(null);
+  const handleLogout = () => logout();
   const openAuth = (mode) => { setOpen(false); setAuthModal(mode); };
 
   return (
@@ -46,7 +46,7 @@ const Navbar = () => {
         <div className={styles.navbarActions}>
           {user ? (
             <div className={styles.userMenu}>
-              <div className={styles.avatar} title={user}>{user[0].toUpperCase()}</div>
+              <div className={styles.avatar} title={user}>{user.name[0].toUpperCase()}</div>
               <button className={styles.logoutBtn} onClick={handleLogout}>Log out</button>
             </div>
           ) : (
@@ -88,8 +88,8 @@ const Navbar = () => {
           <div className={styles.drawerAuthRow}>
             {user ? (
               <>
-                <div className={styles.avatar}>{user[0].toUpperCase()}</div>
-                <span className={styles.drawerUsername}>{user}</span>
+                <div className={styles.avatar}>{user.name[0].toUpperCase()}</div>
+                <span className={styles.drawerUsername}>{user.name}</span>
                 <button className={styles.logoutBtn} onClick={handleLogout}>Log out</button>
               </>
             ) : (
@@ -106,7 +106,7 @@ const Navbar = () => {
         <AuthModal
           initialMode={authModal}
           onClose={() => setAuthModal(null)}
-          onAuth={handleAuth}
+          // onAuth={handleAuth}
         />
       )}
     </>
