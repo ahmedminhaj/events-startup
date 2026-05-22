@@ -80,6 +80,57 @@
               opacity var(--duration) var(--ease);
 }
 
+.cartBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(141, 43, 255, 0.08);
+  color: var(--primary);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background var(--duration) var(--ease),
+              transform  var(--duration) var(--ease),
+              box-shadow var(--duration) var(--ease);
+}
+ 
+.cartBtn:hover {
+  background: rgba(141, 43, 255, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(141, 43, 255, 0.18);
+}
+ 
+.cartBtn:active {
+  transform: translateY(0);
+}
+ 
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--grad-primary);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(141, 43, 255, 0.35);
+  animation: badgePop 0.25s var(--ease) both;
+}
+ 
+@keyframes badgePop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
 /* Mobile Drawer */
 .navbarDrawer {
   display: none;

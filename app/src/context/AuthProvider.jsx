@@ -42,11 +42,7 @@ const AuthProvider = ({
     email,
     password
   ) => {
-    const response =
-      await loginUser({
-        email,
-        password,
-      });
+    const response = await loginUser({ email, password,});
 
     persist(response);
 
@@ -62,12 +58,11 @@ const AuthProvider = ({
     email,
     password
   ) => {
-    const response =
-      await registerUser({
+    const response = await registerUser({
         name,
         email,
         password,
-      });
+    });
 
     persist(response);
 
@@ -79,16 +74,10 @@ const AuthProvider = ({
   */
 
   const logout = () => {
-    localStorage.removeItem(
-      'token'
-    );
-
-    localStorage.removeItem(
-      'user'
-    );
+    localStorage.removeItem( 'token' );
+    localStorage.removeItem( 'user' );
 
     setUser(null);
-
     setToken(null);
   };
 
@@ -97,20 +86,10 @@ const AuthProvider = ({
   */
 
   const persist = ( response ) => {
-    localStorage.setItem(
-      'token',
-      response.token
-    );
+    localStorage.setItem( 'token', response.accessToken);
+    localStorage.setItem( 'user', JSON.stringify(response.user));
 
-    localStorage.setItem(
-      'user',
-      JSON.stringify(
-        response.user
-      )
-    );
-
-    setToken(response.token);
-
+    setToken(response.accessToken);
     setUser(response.user);
   };
 

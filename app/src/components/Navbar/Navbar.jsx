@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react';
+
+import useAuth from '../../hooks/useAuth';
+import useCart from '../../hooks/useCart';
+
 import logo from '../../assets/icons/ticker-logo.svg';
 import AuthModal from '../../components/Auth/AuthModal';
+
 import styles from './Navbar.module.css';
-import  useAuth  from '../../hooks/useAuth';
 
 const NAV_LINKS = [
   { label: 'Home',    to: '/' },
@@ -15,7 +20,9 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [authModal, setAuthModal] = useState(null); 
+
   const { user, logout } = useAuth();
+  const { cartItems } = useCart();
 
   const handleLogout = () => logout();
   const openAuth = (mode) => { setOpen(false); setAuthModal(mode); };
@@ -44,6 +51,12 @@ const Navbar = () => {
         </ul>
 
         <div className={styles.navbarActions}>
+          <Link to="/cart" className={styles.cartBtn}>
+            <ShoppingCart size={20} />
+            {cartItems.length > 0 && (
+              <span className={ styles.cartBadge }> {cartItems.length} </span>
+            )}
+          </Link>
           {user ? (
             <div className={styles.userMenu}>
               <div className={styles.avatar} title={user}>{user.name[0].toUpperCase()}</div>

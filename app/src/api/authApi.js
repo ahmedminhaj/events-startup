@@ -22,12 +22,7 @@ export const registerUser =
       `${API_BASE_URL}/register`,
       {
         method: "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-
+        headers: { "Content-Type": "application/json", },
         body: JSON.stringify(payload),
       }
     );
@@ -41,12 +36,7 @@ export const loginUser =
       `${API_BASE_URL}/login`,
       {
         method: "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-
+        headers: { "Content-Type": "application/json", },
         body: JSON.stringify(payload),
       }
     );

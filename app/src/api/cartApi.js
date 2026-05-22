@@ -2,16 +2,13 @@ const API_BASE_URL =
   'http://localhost:3001/api/cart';
 
 const getHeaders = () => {
-  const token =
-    localStorage.getItem(
-      'token'
-    );
+  const token = localStorage.getItem('token');
+
+  console.log('Token:', token); // Debug log
 
   return {
-    'Content-Type':
-      'application/json',
-
-    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+		Authorization: `Bearer ${token}`,
   };
 };
 
@@ -21,8 +18,7 @@ export const getCartItems =
       await fetch(
         API_BASE_URL,
         {
-          headers:
-            getHeaders(),
+          headers: getHeaders(),
         }
       );
 
@@ -42,13 +38,8 @@ export const addToCart =
         API_BASE_URL,
         {
           method: 'POST',
-
-          headers:
-            getHeaders(),
-
-          body: JSON.stringify({
-            eventId,
-          }),
+          headers: getHeaders(),
+          body: JSON.stringify({ eventId, }),
         }
       );
 
@@ -68,9 +59,7 @@ export const removeFromCart =
         `${API_BASE_URL}/${eventId}`,
         {
           method: 'DELETE',
-
-          headers:
-            getHeaders(),
+          headers: getHeaders(),
         }
       );
 
