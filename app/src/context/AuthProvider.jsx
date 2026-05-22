@@ -96,9 +96,7 @@ const AuthProvider = ({
     SAVE SESSION
   */
 
-  const persist = (
-    response
-  ) => {
+  const persist = ( response ) => {
     localStorage.setItem(
       'token',
       response.token
@@ -124,7 +122,6 @@ const AuthProvider = ({
         login,
         register,
         logout,
-
         isAuthenticated:
           !!token,
       }}

@@ -51,9 +51,9 @@ const EventListItem = ({ event }) => {
           {price > 0 && <div className={styles.priceSub}>per person</div>}
         </div>
 
-        <button className={styles.bookBtn} onClick={e => e.preventDefault()}>
-          Book now →
-        </button>
+        {/* <button className={styles.bookBtn} onClick={e => e.preventDefault()}>
+          Add To Cart →
+        </button> */}
 
         {isUrgent && (
           <span className={styles.spotsLeft}>Only {spotsLeft} spots left!</span>

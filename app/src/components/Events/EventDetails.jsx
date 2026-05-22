@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getEventById } from "../../api/eventsApi";
+
+import useCart from "../../hooks/useCart";
+
 import styles from "./EventDetails.module.css";
 
 const EventDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const { addItem } = useCart();
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -129,7 +134,7 @@ const EventDetails = () => {
           <p className={styles.description}>{event.description}</p>
         </div>
 
-        {/* ── RIGHT — booking card ── */}
+        {/* ── add to cart ── */}
         <aside className={styles.sidebar}>
           <div className={styles.bookingCard}>
             <div className={styles.priceRow}>
@@ -147,8 +152,8 @@ const EventDetails = () => {
               </p>
             )}
 
-            <button className={styles.bookBtn}>
-              {isFree ? "Reserve a spot →" : "Book Now →"}
+            <button className={styles.bookBtn} onClick={() => addItem(event)}>
+              Add to Cart
             </button>
 
             {/* Event details summary */}

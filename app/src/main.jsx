@@ -9,6 +9,7 @@ import Home from './pages/Home/Home';
 import Events from './pages/Events/Events';
 import About from './pages/AboutUs/About';
 import Contact from './pages/Contact/Contact';
+import Cart from './pages/Cart/Cart';
 import EventDetails from './components/Events/EventDetails';
 
 const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: '/events/:id',  element: <EventDetails />  },
       { path: '/about',       element: <About />   },
       { path: '/contact',     element: <Contact /> },
+      { path: '/cart',        element: <Cart /> },
     ],
   },
 ]);

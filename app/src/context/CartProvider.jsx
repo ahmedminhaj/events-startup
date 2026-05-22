@@ -10,29 +10,24 @@ import {
   removeFromCart,
 } from '../api/cartApi';
 
-export const CartContext =
-  createContext(null);
+export const CartContext = createContext(null);
 
 const CartProvider = ({
   children,
 }) => {
-  const [cartItems, setCartItems] =
-    useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
   /*
     LOAD CART
   */
 
-  const fetchCart =
-    async () => {
+  const fetchCart = async () => {
       try {
         setLoading(true);
 
-        const data =
-          await getCartItems();
+        const data = await getCartItems();
 
         setCartItems(data);
       } catch (error) {
@@ -46,8 +41,7 @@ const CartProvider = ({
     ADD
   */
 
-  const addItem =
-    async (event) => {
+  const addItem = async (event) => {
       try {
         await addToCart(event.id);
 
@@ -64,8 +58,7 @@ const CartProvider = ({
     REMOVE
   */
 
-  const removeItem =
-    async (eventId) => {
+  const removeItem = async (eventId) => {
       try {
         await removeFromCart(
           eventId
@@ -90,11 +83,8 @@ const CartProvider = ({
     <CartContext.Provider
       value={{
         cartItems,
-
         loading,
-
         addItem,
-
         removeItem,
       }}
     >
