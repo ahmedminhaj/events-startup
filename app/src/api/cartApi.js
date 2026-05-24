@@ -4,8 +4,6 @@ const API_BASE_URL =
 const getHeaders = () => {
   const token = localStorage.getItem('token');
 
-  console.log('Token:', token); // Debug log
-
   return {
     'Content-Type': 'application/json',
 		Authorization: `Bearer ${token}`,

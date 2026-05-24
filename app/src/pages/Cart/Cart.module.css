@@ -444,3 +444,94 @@
     min-width: unset;
   }
 }
+
+/* ─────────────────────────────────────────
+   Additions: success screen, error, spinner
+───────────────────────────────────────── */
+
+/* Success state */
+.successState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 58vh;
+  text-align: center;
+  gap: 0;
+}
+
+.successIcon {
+  font-size: 80px;
+  line-height: 1;
+  margin-bottom: 24px;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.successBody {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 400px;
+  margin-bottom: 32px;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.secondaryLink {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.75;
+  transition: opacity 200ms;
+}
+
+.secondaryLink:hover { opacity: 1; }
+
+/* Error message */
+.errorMsg {
+  font-size: 13px;
+  font-weight: 600;
+  color: #d93a1a;
+  background: #fff3f0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* Inline spinner inside button */
+.btnSpinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -9,6 +9,7 @@ import initDatabase from "./initDatabase.js";
 import eventsRouter from "./routers/events.js";
 import authRouter from "./routers/auth.js";
 import cartRouter from "./routers/cart.js";
+import bookingsRouter from "./routers/bookings.js";
 
 const app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ const apiRouter = express.Router();
 apiRouter.use("/events", eventsRouter);
 apiRouter.use("/auth", authRouter);
 apiRouter.use("/cart", cartRouter);
+apiRouter.use("/bookings", bookingsRouter);
 
 // This is an example of how to set up a route. Replace it with your own.
 // apiRouter.get("/", async (req, res) => {

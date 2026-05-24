@@ -19,7 +19,7 @@ const NAV_LINKS = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [authModal, setAuthModal] = useState(null); 
+  const [authModal, setAuthModal] = useState(null);
 
   const { user, logout } = useAuth();
   const { cartItems } = useCart();
@@ -48,24 +48,46 @@ const Navbar = () => {
               </NavLink>
             </li>
           ))}
+          {/* My Bookings — only shown when logged in */}
+          {user && (
+            <li>
+              <NavLink
+                to="/bookings"
+                className={({ isActive }) =>
+                  `${styles.navbarLink}${isActive ? ` ${styles['navbarLink--active']}` : ''}`
+                }
+              >
+                My Bookings
+              </NavLink>
+            </li>
+          )}
         </ul>
 
         <div className={styles.navbarActions}>
           <Link to="/cart" className={styles.cartBtn}>
             <ShoppingCart size={20} />
             {cartItems.length > 0 && (
-              <span className={ styles.cartBadge }> {cartItems.length} </span>
+              <span className={styles.cartBadge}>{cartItems.length}</span>
             )}
           </Link>
           {user ? (
             <div className={styles.userMenu}>
-              <div className={styles.avatar} title={user}>{user.name[0].toUpperCase()}</div>
-              <button className={styles.logoutBtn} onClick={handleLogout}>Log out</button>
+              <div className={styles.avatar} title={user.name}>
+                {user.name[0].toUpperCase()}
+              </div>
+              <button className={styles.logoutBtn} onClick={handleLogout}>
+                Log out
+              </button>
             </div>
           ) : (
             <>
-              <button className={styles.authLink} onClick={() => setAuthModal('login')}>Log in</button>
-              <button className={`btn btnPrimary ${styles.authBtn}`} onClick={() => setAuthModal('register')}>
+              <button className={styles.authLink} onClick={() => setAuthModal('login')}>
+                Log in
+              </button>
+              <button
+                className={`btn btnPrimary ${styles.authBtn}`}
+                onClick={() => setAuthModal('register')}
+              >
                 Sign up
               </button>
             </>
@@ -98,6 +120,15 @@ const Navbar = () => {
               {label}
             </Link>
           ))}
+          {user && (
+            <Link
+              to="/bookings"
+              className={styles.navbarDrawerLink}
+              onClick={() => setOpen(false)}
+            >
+              My Bookings
+            </Link>
+          )}
           <div className={styles.drawerAuthRow}>
             {user ? (
               <>
@@ -119,7 +150,6 @@ const Navbar = () => {
         <AuthModal
           initialMode={authModal}
           onClose={() => setAuthModal(null)}
-          // onAuth={handleAuth}
         />
       )}
     </>

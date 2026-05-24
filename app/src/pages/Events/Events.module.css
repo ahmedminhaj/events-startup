@@ -77,6 +77,99 @@
   line-height: 1.6;
 }
 
+/* ── Loading & Error shared wrapper ── */
+.stateWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.stateTitle {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.stateBody {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 340px;
+  margin-bottom: 0;
+}
+
+/* ── Spinner ── */
+.spinner {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 24px;
+  animation: spin 1s linear infinite;
+}
+
+.spinner svg {
+  width: 100%;
+  height: 100%;
+}
+
+.spinnerTrack {
+  stroke: rgba(141, 43, 255, 0.12);
+}
+
+.spinnerArc {
+  stroke: var(--primary);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error icon circle ── */
+.errorIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff3f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 900;
+  color: #d93a1a;
+  font-family: var(--font-display);
+}
+
+/* ── Retry button ── */
+.retryBtn {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(141, 43, 255, 0.25);
+  background: transparent;
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 200ms var(--ease),
+              border-color 200ms var(--ease),
+              transform 200ms var(--ease);
+}
+
+.retryBtn:hover {
+  background: rgba(141, 43, 255, 0.06);
+  border-color: rgba(141, 43, 255, 0.45);
+  transform: translateY(-1px);
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .page {

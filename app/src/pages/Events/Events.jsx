@@ -39,16 +39,30 @@ const Events = () => {
   
   if (loading) {
     return (
-      <div className={styles.status}>
-        Loading events...
+      <div className={styles.stateWrap}>
+        <div className={styles.spinner}>
+          <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="26" cy="26" r="22" strokeWidth="3" className={styles.spinnerTrack} />
+            <path d="M26 4a22 22 0 0 1 22 22" strokeWidth="3" strokeLinecap="round" className={styles.spinnerArc} />
+          </svg>
+        </div>
+        <p className={styles.stateTitle}>Loading events</p>
+        <p className={styles.stateBody}>Fetching upcoming events...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className={styles.error}>
-        {error}
+      <div className={styles.stateWrap}>
+        <div className={styles.errorIcon}>
+          <span>!</span>
+        </div>
+        <p className={styles.stateTitle}>Something went wrong</p>
+        <p className={styles.stateBody}>{error}</p>
+        <button className={styles.retryBtn} onClick={() => window.location.reload()}>
+          ↻ Try again
+        </button>
       </div>
     );
   }

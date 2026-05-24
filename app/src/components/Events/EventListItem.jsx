@@ -1,9 +1,23 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './EventListItem.module.css';
+import useCart from '../../hooks/useCart';
+import useAuth from '../../hooks/useAuth';
 
 const EventListItem = ({ event }) => {
+  const { addItem } = useCart();
+  const { isAuthenticated } = useAuth();
+  const [added, setAdded] = useState(false);
   const { id, title, date, city, category, price, image, spotsLeft, description, tags } = event;
   const isUrgent = spotsLeft <= 20;
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addItem(event);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
 
   return (
     <Link to={`/events/${id}`} className={styles.item}>
@@ -51,9 +65,16 @@ const EventListItem = ({ event }) => {
           {price > 0 && <div className={styles.priceSub}>per person</div>}
         </div>
 
-        {/* <button className={styles.bookBtn} onClick={e => e.preventDefault()}>
-          Add To Cart →
-        </button> */}
+        {isAuthenticated ? (
+          <button
+            className={added ? styles.bookBtnAdded : styles.bookBtn}
+            onClick={handleAddToCart}
+          >
+            {added ? '✓ Added to Cart' : 'Add To Cart →'}
+          </button>
+        ) : (
+          <div className={styles.loginAlertBox}>Login to Book</div>
+        )}
 
         {isUrgent && (
           <span className={styles.spotsLeft}>Only {spotsLeft} spots left!</span>
@@ -61,6 +82,6 @@ const EventListItem = ({ event }) => {
       </div>
     </Link>
   );
-}
+};
 
 export default EventListItem;

@@ -11,6 +11,7 @@ import About from './pages/AboutUs/About';
 import Contact from './pages/Contact/Contact';
 import Cart from './pages/Cart/Cart';
 import EventDetails from './components/Events/EventDetails';
+import MyBookings from './pages/MyBookings/MyBookings';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: '/about',       element: <About />   },
       { path: '/contact',     element: <Contact /> },
       { path: '/cart',        element: <Cart /> },
+      { path: '/bookings',     element: <MyBookings /> },
     ],
   },
 ]);

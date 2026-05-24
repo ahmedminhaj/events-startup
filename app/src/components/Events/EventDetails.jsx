@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getEventById } from "../../api/eventsApi";
 
 import useCart from "../../hooks/useCart";
+import useAuth from "../../hooks/useAuth";
 
 import styles from "./EventDetails.module.css";
 
@@ -11,10 +12,12 @@ const EventDetails = () => {
   const navigate = useNavigate();
 
   const { addItem } = useCart();
+  const { isAuthenticated } = useAuth();
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [added, setAdded] = useState(false);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -32,6 +35,12 @@ const EventDetails = () => {
     fetchEvent();
   }, [id]);
 
+  const handleAddToCart = () => {
+    addItem(event);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
   if (loading) {
     return (
       <div className={styles.statusWrap}>
@@ -46,9 +55,7 @@ const EventDetails = () => {
       <div className={styles.statusWrap}>
         <div className={styles.errorIcon}>⚠️</div>
         <p className={styles.errorText}>{error}</p>
-        <button className={styles.backBtn} onClick={() => navigate(-1)}>
-          ← Go back
-        </button>
+        <button className={styles.backBtn} onClick={() => navigate(-1)}>← Go back</button>
       </div>
     );
   }
@@ -58,9 +65,7 @@ const EventDetails = () => {
       <div className={styles.statusWrap}>
         <div className={styles.errorIcon}>🔍</div>
         <p className={styles.errorText}>Event not found</p>
-        <button className={styles.backBtn} onClick={() => navigate(-1)}>
-          ← Go back
-        </button>
+        <button className={styles.backBtn} onClick={() => navigate(-1)}>← Go back</button>
       </div>
     );
   }
@@ -80,9 +85,7 @@ const EventDetails = () => {
       <div className={styles.imageWrap}>
         <img src={event.image} alt={event.title} className={styles.image} />
         <div className={styles.imageOverlay} />
-
         <span className={styles.categoryBadge}>{event.category}</span>
-
         {isUrgent && (
           <span className={styles.urgentBadge}>🔥 {event.spotsLeft} spots left</span>
         )}
@@ -95,7 +98,6 @@ const EventDetails = () => {
         <div className={styles.main}>
           <h1 className={styles.title}>{event.title}</h1>
 
-          {/* Meta row */}
           <div className={styles.meta}>
             {event.date && (
               <span className={styles.metaItem}>
@@ -117,7 +119,6 @@ const EventDetails = () => {
             )}
           </div>
 
-          {/* Tags */}
           {event.tags?.length > 0 && (
             <div className={styles.tags}>
               {event.tags.map((tag) => (
@@ -126,10 +127,8 @@ const EventDetails = () => {
             </div>
           )}
 
-          {/* Divider */}
           <div className={styles.divider} />
 
-          {/* Description */}
           <h2 className={styles.sectionHeading}>About this event</h2>
           <p className={styles.description}>{event.description}</p>
         </div>
@@ -141,22 +140,26 @@ const EventDetails = () => {
               <span className={styles.price}>
                 {isFree ? "Free" : `${event.price} DKK`}
               </span>
-              {!isFree && (
-                <span className={styles.priceSub}>per person</span>
-              )}
+              {!isFree && <span className={styles.priceSub}>per person</span>}
             </div>
 
             {isUrgent && (
-              <p className={styles.spotsLeft}>
-                ⚡ Only {event.spotsLeft} spots remaining!
-              </p>
+              <p className={styles.spotsLeft}>⚡ Only {event.spotsLeft} spots remaining!</p>
             )}
 
-            <button className={styles.bookBtn} onClick={() => addItem(event)}>
-              Add to Cart
-            </button>
+            {isAuthenticated ? (
+              <button
+                className={added ? styles.bookBtnAdded : styles.bookBtn}
+                onClick={handleAddToCart}
+              >
+                {added ? "✓ Added to Cart" : "Add to Cart"}
+              </button>
+            ) : (
+              <div className={styles.loginAlertBox}>
+                Login first to book this event
+              </div>
+            )}
 
-            {/* Event details summary */}
             <ul className={styles.detailList}>
               {event.date && (
                 <li className={styles.detailItem}>
