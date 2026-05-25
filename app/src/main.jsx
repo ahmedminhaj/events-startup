@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AuthProvider from './context/AuthProvider';
+import CartProvider from './context/CartProvider';
 
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home';
 import Events from './pages/Events/Events';
 import About from './pages/AboutUs/About';
 import Contact from './pages/Contact/Contact';
+import Cart from './pages/Cart/Cart';
+import EventDetails from './components/Events/EventDetails';
+import MyBookings from './pages/MyBookings/MyBookings';
 
 const router = createBrowserRouter([
   {
@@ -14,14 +19,21 @@ const router = createBrowserRouter([
     children: [
       { index: true,          element: <Home />    },
       { path: '/events',      element: <Events />  },
+      { path: '/events/:id',  element: <EventDetails />  },
       { path: '/about',       element: <About />   },
       { path: '/contact',     element: <Contact /> },
+      { path: '/cart',        element: <Cart /> },
+      { path: '/bookings',     element: <MyBookings /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

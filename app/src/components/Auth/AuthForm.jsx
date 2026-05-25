@@ -1,49 +1,147 @@
 import { useState } from 'react';
+
+import useAuth from '../../hooks/useAuth';
+
 import styles from './AuthForm.module.css';
 
-const AuthForm = ({ mode, onAuth }) => {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-  const [error, setError] = useState('');
+const AuthForm = ({
+  mode,
+  onAuth,
+}) => {
 
-  const isLogin = mode === 'login';
+  const {
+    login,
+    register,
+  } = useAuth();
 
-  const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
+  const [form, setForm] =
+    useState({
+      name: '',
+      email: '',
+      password: '',
+    });
 
-  const handleSubmit = (e) => {
+  const [error, setError] =
+    useState('');
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const isLogin =
+    mode === 'login';
+
+  const set =
+    (field) => (e) =>
+      setForm((f) => ({
+        ...f,
+
+        [field]:
+          e.target.value,
+      }));
+
+  const handleSubmit = async (
+    e
+  ) => {
     e.preventDefault();
+
     setError('');
 
-    if (!isLogin && !form.name.trim()) {
-      setError('Please enter your name.');
-      return;
-    }
-    if (!form.email.trim()) {
-      setError('Please enter your email.');
-      return;
-    }
-    if (!form.password) {
-      setError('Please enter your password.');
-      return;
-    }
-    if (form.password.length < 6) {
-      setError('Password must be at least 6 characters.');
+    /*
+      Validation
+    */
+
+    if (
+      !isLogin &&
+      !form.name.trim()
+    ) {
+      setError(
+        'Please enter your name.'
+      );
+
       return;
     }
 
-    const displayName = isLogin ? form.email.split('@')[0] : form.name.trim();
-    onAuth(displayName);
+    if (!form.email.trim()) {
+      setError(
+        'Please enter your email.'
+      );
+
+      return;
+    }
+
+    if (!form.password) {
+      setError(
+        'Please enter your password.'
+      );
+
+      return;
+    }
+
+    if (
+      form.password.length < 6
+    ) {
+      setError(
+        'Password must be at least 6 characters.'
+      );
+
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      if (isLogin) {
+        await login(
+          form.email,
+          form.password
+        );
+      } else {
+        await register(
+          form.name,
+          form.email,
+          form.password
+        );
+      }
+
+      if (onAuth) {
+        onAuth();
+      }
+    } catch (err) {
+      setError(
+        err.message ||
+          'Authentication failed'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form} noValidate>
-      {error && <p className={styles.error}>{error}</p>}
+    <form
+      onSubmit={handleSubmit}
+      className={styles.form}
+      noValidate
+    >
+      {error && (
+        <p className={styles.error}>
+          {error}
+        </p>
+      )}
 
       {!isLogin && (
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="auth-name">Full name</label>
+          <label
+            className={styles.label}
+            htmlFor="auth-name"
+          >
+            Full name
+          </label>
+
           <input
             id="auth-name"
-            className={styles.input}
+            className={
+              styles.input
+            }
             type="text"
             placeholder="Jane Smith"
             value={form.name}
@@ -54,10 +152,18 @@ const AuthForm = ({ mode, onAuth }) => {
       )}
 
       <div className={styles.field}>
-        <label className={styles.label} htmlFor="auth-email">Email address</label>
+        <label
+          className={styles.label}
+          htmlFor="auth-email"
+        >
+          Email address
+        </label>
+
         <input
           id="auth-email"
-          className={styles.input}
+          className={
+            styles.input
+          }
           type="email"
           placeholder="you@example.com"
           value={form.email}
@@ -67,20 +173,44 @@ const AuthForm = ({ mode, onAuth }) => {
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label} htmlFor="auth-password">Password</label>
+        <label
+          className={styles.label}
+          htmlFor="auth-password"
+        >
+          Password
+        </label>
+
         <input
           id="auth-password"
-          className={styles.input}
+          className={
+            styles.input
+          }
           type="password"
           placeholder="Min. 6 characters"
-          value={form.password}
-          onChange={set('password')}
-          autoComplete={isLogin ? 'current-password' : 'new-password'}
+          value={
+            form.password
+          }
+          onChange={set(
+            'password'
+          )}
+          autoComplete={
+            isLogin
+              ? 'current-password'
+              : 'new-password'
+          }
         />
       </div>
 
-      <button type="submit" className={`btn btnPrimary ${styles.submit}`}>
-        {isLogin ? 'Log in' : 'Create account'}
+      <button
+        type="submit"
+        className={`btn btnPrimary ${styles.submit}`}
+        disabled={loading}
+      >
+        {loading
+          ? 'Please wait...'
+          : isLogin
+            ? 'Log in'
+            : 'Create account'}
       </button>
     </form>
   );

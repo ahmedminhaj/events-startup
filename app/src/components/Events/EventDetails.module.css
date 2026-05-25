@@ -1,0 +1,467 @@
+/* ── Page wrapper ── */
+.page {
+  padding: 56px 110px 100px;
+}
+
+/* ── Status / Error / Loading screens ── */
+.statusWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+  text-align: center;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(141, 43, 255, 0.15);
+  border-top-color: var(--primary);
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.statusText {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+}
+
+.errorIcon {
+  font-size: 52px;
+  line-height: 1;
+}
+
+.errorText {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ── Back button ── */
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(141, 43, 255, 0.2);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--primary);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  margin-bottom: 36px;
+  transition: background 240ms var(--ease),
+              border-color 240ms var(--ease),
+              transform 240ms var(--ease),
+              box-shadow 240ms var(--ease);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(84, 42, 125, 0.08);
+}
+
+.backBtn:hover {
+  background: #fff;
+  border-color: rgba(141, 43, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(141, 43, 255, 0.14);
+}
+
+/* ── Hero image ── */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  border-radius: 28px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  box-shadow: 0 24px 60px rgba(83, 38, 132, 0.18);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms var(--ease);
+}
+
+.imageWrap:hover .image {
+  transform: scale(1.03);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(30, 10, 60, 0.48) 0%,
+    transparent 55%
+  );
+}
+
+/* ── Badges on image ── */
+.categoryBadge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.52);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.urgentBadge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #fff3f0;
+  color: #d93a1a;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  box-shadow: 0 4px 12px rgba(217, 58, 26, 0.2);
+}
+
+/* ── Two-column layout ── */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── LEFT: Main content ── */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+/* ── Meta row ── */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.metaIcon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* ── Tags ── */
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+  background: #f1e5ff;
+  color: var(--primary);
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.07);
+  margin: 32px 0;
+}
+
+/* ── Description ── */
+.sectionHeading {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* ── RIGHT: Booking card (sidebar) ── */
+.sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.bookingCard {
+  background: #fff;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 32px;
+  box-shadow: 0 18px 48px rgba(64, 34, 94, 0.11);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Price ── */
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.priceSub {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ── Spots left ── */
+.spotsLeft {
+  font-size: 13px;
+  font-weight: 700;
+  color: #d93a1a;
+  font-family: var(--font-display);
+  background: #fff3f0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin: -6px 0;
+}
+
+.loginAlertBox {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fdf1fc;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.bookBtnAdded {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(141, 43, 255, 0.28);
+  transition: transform 240ms cubic-bezier(.4,0,.2,1),
+              box-shadow 240ms cubic-bezier(.4,0,.2,1);
+  background-color: #22c55e;
+  color: white;
+  cursor: default;
+}
+
+/* ── Book button ── */
+.bookBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(141, 43, 255, 0.32);
+  transition: transform 240ms var(--ease),
+              box-shadow 240ms var(--ease);
+}
+
+.bookBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(141, 43, 255, 0.44);
+}
+
+.bookBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Detail list in sidebar ── */
+.detailList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  padding-top: 20px;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.detailItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detailIcon {
+  font-size: 18px;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #f1e5ff;
+  flex-shrink: 0;
+}
+
+.detailItem > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detailLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.detailValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .page {
+    padding: 48px 48px 80px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr 320px;
+    gap: 32px;
+  }
+
+  .imageWrap {
+    height: 380px;
+  }
+}
+
+@media (max-width: 860px) {
+  .page {
+    padding: 36px 20px 60px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .sidebar {
+    position: static;
+    margin-top: 40px;
+  }
+
+  .imageWrap {
+    height: 280px;
+    border-radius: 20px;
+    margin-bottom: 36px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .imageWrap {
+    height: 220px;
+  }
+
+  .bookingCard {
+    padding: 24px 20px;
+  }
+
+  .price {
+    font-size: 30px;
+  }
+
+  .meta {
+    gap: 12px;
+  }
+}

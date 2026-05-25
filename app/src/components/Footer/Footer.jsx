@@ -38,7 +38,6 @@ const Footer = () => {
         {/* Link columns */}
         {Object.entries(LINKS).map(([col, items]) => (
           <div key={col}>
-            {/* <div className={styles.footerColTitle}>{col}</div> */}
             <ul className={styles.footerColLinks}>
               {items.map(item => (
                 <li key={item}>
@@ -53,12 +52,7 @@ const Footer = () => {
       </div>
 
       <div className={styles.footerBottom}>
-        <span>© {year} Ticker, Inc. All rights reserved.</span>
-        <div className={styles.footerBottomLinks}>
-          <a href="#" className={styles.footerBottomLink}>Privacy</a>
-          <a href="#" className={styles.footerBottomLink}>Terms</a>
-          <a href="#" className={styles.footerBottomLink}>Cookies</a>
-        </div>
+        <span>© {year} Ticker, Inc. All rights reserved by Hack Your Future.</span>
       </div>
     </footer>
   );

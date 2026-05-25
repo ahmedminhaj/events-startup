@@ -3,11 +3,11 @@ import Login from '../../pages/Auth/Login';
 import Register from '../../pages/Auth/Register';
 import styles from './AuthModal.module.css';
 
-const AuthModal = ({ initialMode = 'login', onClose, onAuth }) => {
+const AuthModal = ({ initialMode = 'login', onClose }) => {
   const [mode, setMode] = useState(initialMode);
 
-  const handleAuth = (displayName) => {
-    onAuth(displayName);
+  const handleAuth = () => {
+    // onAuth(displayName);
     onClose();
   };
 

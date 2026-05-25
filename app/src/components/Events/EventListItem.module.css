@@ -163,6 +163,37 @@
   letter-spacing: .02em;
 }
 
+.loginAlertBox {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fdf1fc;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.bookBtnAdded {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(141, 43, 255, 0.28);
+  transition: transform 240ms cubic-bezier(.4,0,.2,1),
+              box-shadow 240ms cubic-bezier(.4,0,.2,1);
+  background-color: #22c55e;
+  color: white;
+  cursor: default;
+}
+
 .bookBtn {
   display: inline-flex;
   align-items: center;

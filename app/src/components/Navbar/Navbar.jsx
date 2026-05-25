@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react';
+
+import useAuth from '../../hooks/useAuth';
+import useCart from '../../hooks/useCart';
+
 import logo from '../../assets/icons/ticker-logo.svg';
 import AuthModal from '../../components/Auth/AuthModal';
+
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
@@ -13,11 +19,12 @@ const NAV_LINKS = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [authModal, setAuthModal] = useState(null); // 'login' | 'register' | null
-  const [user, setUser] = useState(null);
+  const [authModal, setAuthModal] = useState(null);
 
-  const handleAuth = (displayName) => setUser(displayName);
-  const handleLogout = () => setUser(null);
+  const { user, logout } = useAuth();
+  const { cartItems } = useCart();
+
+  const handleLogout = () => logout();
   const openAuth = (mode) => { setOpen(false); setAuthModal(mode); };
 
   return (
@@ -41,18 +48,46 @@ const Navbar = () => {
               </NavLink>
             </li>
           ))}
+          {/* My Bookings — only shown when logged in */}
+          {user && (
+            <li>
+              <NavLink
+                to="/bookings"
+                className={({ isActive }) =>
+                  `${styles.navbarLink}${isActive ? ` ${styles['navbarLink--active']}` : ''}`
+                }
+              >
+                My Bookings
+              </NavLink>
+            </li>
+          )}
         </ul>
 
         <div className={styles.navbarActions}>
+          <Link to="/cart" className={styles.cartBtn}>
+            <ShoppingCart size={20} />
+            {cartItems.length > 0 && (
+              <span className={styles.cartBadge}>{cartItems.length}</span>
+            )}
+          </Link>
           {user ? (
             <div className={styles.userMenu}>
-              <div className={styles.avatar} title={user}>{user[0].toUpperCase()}</div>
-              <button className={styles.logoutBtn} onClick={handleLogout}>Log out</button>
+              <div className={styles.avatar} title={user.name}>
+                {user.name[0].toUpperCase()}
+              </div>
+              <button className={styles.logoutBtn} onClick={handleLogout}>
+                Log out
+              </button>
             </div>
           ) : (
             <>
-              <button className={styles.authLink} onClick={() => setAuthModal('login')}>Log in</button>
-              <button className={`btn btnPrimary ${styles.authBtn}`} onClick={() => setAuthModal('register')}>
+              <button className={styles.authLink} onClick={() => setAuthModal('login')}>
+                Log in
+              </button>
+              <button
+                className={`btn btnPrimary ${styles.authBtn}`}
+                onClick={() => setAuthModal('register')}
+              >
                 Sign up
               </button>
             </>
@@ -85,11 +120,20 @@ const Navbar = () => {
               {label}
             </Link>
           ))}
+          {user && (
+            <Link
+              to="/bookings"
+              className={styles.navbarDrawerLink}
+              onClick={() => setOpen(false)}
+            >
+              My Bookings
+            </Link>
+          )}
           <div className={styles.drawerAuthRow}>
             {user ? (
               <>
-                <div className={styles.avatar}>{user[0].toUpperCase()}</div>
-                <span className={styles.drawerUsername}>{user}</span>
+                <div className={styles.avatar}>{user.name[0].toUpperCase()}</div>
+                <span className={styles.drawerUsername}>{user.name}</span>
                 <button className={styles.logoutBtn} onClick={handleLogout}>Log out</button>
               </>
             ) : (
@@ -106,7 +150,6 @@ const Navbar = () => {
         <AuthModal
           initialMode={authModal}
           onClose={() => setAuthModal(null)}
-          onAuth={handleAuth}
         />
       )}
     </>
