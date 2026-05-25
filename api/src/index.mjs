@@ -35,6 +35,7 @@ apiRouter.use("/bookings", bookingsRouter);
 // apiRouter.use("/nested", nestedRouter);
 
 app.use("/api", apiRouter);
+app.use(cors({ origin: 'https://hyf-ticker-app.onrender.com' }));
 app.listen(process.env.PORT, () => {
   console.log(`API listening on port ${process.env.PORT}`);
 });
