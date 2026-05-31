@@ -2,7 +2,7 @@ import { useState, useEffectEvent } from 'react';
 import { addToCart, getCartItems, removeFromCart } from '../api/cartApi';
 import { CartContext } from './CartContext';
 
-export const CartProvider = ({ children }) => {
+const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
 

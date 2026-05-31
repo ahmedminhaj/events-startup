@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { loginUser, registerUser } from '../api/authApi';
 import { AuthContext } from './AuthContext';
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem('user');
     return stored ? JSON.parse(stored) : null;

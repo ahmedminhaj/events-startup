@@ -1,147 +1,67 @@
 import { useState } from 'react';
-
 import useAuth from '../../hooks/useAuth';
-
 import styles from './AuthForm.module.css';
 
-const AuthForm = ({
-  mode,
-  onAuth,
-}) => {
+const AuthForm = ({ mode, onAuth }) => {
+  const { login, register } = useAuth();
 
-  const {
-    login,
-    register,
-  } = useAuth();
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const [form, setForm] =
-    useState({
-      name: '',
-      email: '',
-      password: '',
-    });
+  const isLogin = mode === 'login';
 
-  const [error, setError] =
-    useState('');
+  const set = (field) => (e) =>
+    setForm((f) => ({ ...f, [field]: e.target.value }));
 
-  const [loading, setLoading] =
-    useState(false);
-
-  const isLogin =
-    mode === 'login';
-
-  const set =
-    (field) => (e) =>
-      setForm((f) => ({
-        ...f,
-
-        [field]:
-          e.target.value,
-      }));
-
-  const handleSubmit = async (
-    e
-  ) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError('');
 
-    /*
-      Validation
-    */
-
-    if (
-      !isLogin &&
-      !form.name.trim()
-    ) {
-      setError(
-        'Please enter your name.'
-      );
-
+    if (!isLogin && !form.name.trim()) {
+      setError('Please enter your name.');
       return;
     }
-
     if (!form.email.trim()) {
-      setError(
-        'Please enter your email.'
-      );
-
+      setError('Please enter your email.');
       return;
     }
-
     if (!form.password) {
-      setError(
-        'Please enter your password.'
-      );
-
+      setError('Please enter your password.');
       return;
     }
-
-    if (
-      form.password.length < 6
-    ) {
-      setError(
-        'Password must be at least 6 characters.'
-      );
-
+    if (form.password.length < 6) {
+      setError('Password must be at least 6 characters.');
       return;
     }
 
     try {
       setLoading(true);
-
       if (isLogin) {
-        await login(
-          form.email,
-          form.password
-        );
+        await login(form.email, form.password);
       } else {
-        await register(
-          form.name,
-          form.email,
-          form.password
-        );
+        await register(form.name, form.email, form.password);
       }
-
-      if (onAuth) {
-        onAuth();
-      }
+      if (onAuth) onAuth();
     } catch (err) {
-      setError(
-        err.message ||
-          'Authentication failed'
-      );
+      setError(err.message || 'Authentication failed');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={styles.form}
-      noValidate
-    >
-      {error && (
-        <p className={styles.error}>
-          {error}
-        </p>
-      )}
+    <form onSubmit={handleSubmit} className={styles.form} noValidate>
+      {error && <p className={styles.error}>{error}</p>}
 
       {!isLogin && (
         <div className={styles.field}>
-          <label
-            className={styles.label}
-            htmlFor="auth-name"
-          >
+          <label className={styles.label} htmlFor="auth-name">
             Full name
           </label>
-
           <input
             id="auth-name"
-            className={
-              styles.input
-            }
+            className={styles.input}
             type="text"
             placeholder="Jane Smith"
             value={form.name}
@@ -152,18 +72,12 @@ const AuthForm = ({
       )}
 
       <div className={styles.field}>
-        <label
-          className={styles.label}
-          htmlFor="auth-email"
-        >
+        <label className={styles.label} htmlFor="auth-email">
           Email address
         </label>
-
         <input
           id="auth-email"
-          className={
-            styles.input
-          }
+          className={styles.input}
           type="email"
           placeholder="you@example.com"
           value={form.email}
@@ -173,31 +87,17 @@ const AuthForm = ({
       </div>
 
       <div className={styles.field}>
-        <label
-          className={styles.label}
-          htmlFor="auth-password"
-        >
+        <label className={styles.label} htmlFor="auth-password">
           Password
         </label>
-
         <input
           id="auth-password"
-          className={
-            styles.input
-          }
+          className={styles.input}
           type="password"
           placeholder="Min. 6 characters"
-          value={
-            form.password
-          }
-          onChange={set(
-            'password'
-          )}
-          autoComplete={
-            isLogin
-              ? 'current-password'
-              : 'new-password'
-          }
+          value={form.password}
+          onChange={set('password')}
+          autoComplete={isLogin ? 'current-password' : 'new-password'}
         />
       </div>
 
@@ -206,11 +106,7 @@ const AuthForm = ({
         className={`btn btnPrimary ${styles.submit}`}
         disabled={loading}
       >
-        {loading
-          ? 'Please wait...'
-          : isLogin
-            ? 'Log in'
-            : 'Create account'}
+        {loading ? 'Please wait...' : isLogin ? 'Log in' : 'Create account'}
       </button>
     </form>
   );
